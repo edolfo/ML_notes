@@ -48,5 +48,35 @@ Why can't we use ReLU as an activation function for this problem?  Well, there's
 whose inverse you want to find.  Then, you draw the line y=x.  Then you mirror the original function on the line y=x.  You'll
 notice if you do this with ReLU, the inverse is not a function at all, since it fails the vertical line test!
 
-### Linear algebra
+### (Linear) Algebra
 
+Colah mentions the following items:
+
+1. Determinants
+2. Linear transformations
+3. Linear translations
+4. Bijections (but not injections)
+
+These are all important because they allow us to remain in linearland (instead of hypercurve hyperspace land), and they can
+all be applied to the tanh activation function.  To quote:
+
+```
+1. A linear transformation by the “weight” matrix W
+2. A translation by the vector b
+3. Point-wise application of tanh.
+```
+
+So, for the items:
+
+1. Our weight matrix has a determinant!  A determinant of zero means linear dependence, instead of linear independence.
+Linear dependence for the weight matrix ultimately means we are not guaranteed to find a unique solution!  This means our
+transformation is not convex, which may end up breaking gradient descent as a method of convergence.  More on that in a 
+different session.
+2. A linear transformation can be thought of as a rotation that warps the X-Y grid, and any points that were on the grid
+move along with it.  I like to think of it as a rubber grid that gets warped as you tug one edge up and the other edge down.
+3. A linear translation is an operation that shifts a set of points in one direction on the same plane.  Imagine a set of
+points on the X-Y plane, and tilting the plane so that they all shift over to the left by the same amount.
+4. Bijections are mappings that are one-to-one and onto (sometimes called an injective and a surjective 
+mapping, respectively).  They take points from A (the domain) and map them onto B (the range).  This 
+[Mathworld link](http://mathworld.wolfram.com/Injection.html) explains it much more intuitively via pictures than I ever
+could with text.
